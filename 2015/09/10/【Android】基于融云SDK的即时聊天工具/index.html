@@ -15,15 +15,27 @@
 
 
 
-<meta name="description" content="95/Android开发/猪厂打杂">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MummyDing's Blog">
-<meta property="og:url" content="https://mummyding.github.io/archives/index.html">
+<meta name="description" content="一直想做一个类似QQ的聊天APP，先是仿了QQ的UI(详见【Android】高仿QQ 5.0+ UI),现在借助第三方服务实现了聊天功能。在知乎上看到有人也在问如何实现一个IM，如果完全自己做，还得去了解一些通信协议，于是偷懒使用了第三方的服务。虽说底层的通信不需要自己管，但其他的编码量也并不小，前后花了一个多礼拜。(当然也是自己学艺不精)关于融云，我引用我在知乎上的一段回答:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于融云SDK的即时聊天工具">
+<meta property="og:url" content="https://mummyding.github.io/2015/09/10/【Android】基于融云SDK的即时聊天工具/index.html">
 <meta property="og:site_name" content="MummyDing's Blog">
-<meta property="og:description" content="95/Android开发/猪厂打杂">
+<meta property="og:description" content="一直想做一个类似QQ的聊天APP，先是仿了QQ的UI(详见【Android】高仿QQ 5.0+ UI),现在借助第三方服务实现了聊天功能。在知乎上看到有人也在问如何实现一个IM，如果完全自己做，还得去了解一些通信协议，于是偷懒使用了第三方的服务。虽说底层的通信不需要自己管，但其他的编码量也并不小，前后花了一个多礼拜。(当然也是自己学艺不精)关于融云，我引用我在知乎上的一段回答:">
+<meta property="og:image" content="http://img.blog.csdn.net/20151117150127981?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151117150149716?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151117150208437?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151117150224732?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://ww4.sinaimg.cn/bmiddle/df755665gw1evwjtpvm3ej20k00zk76h.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/bmiddle/df755665gw1evwjtr9azrj20k00zk76k.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/bmiddle/df755665gw1evwjtrxucaj20k00zkgmz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/bmiddle/df755665gw1evwjtt4b9rj20k00zk76v.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/bmiddle/df755665gw1evwjtumh95j20k00zktb3.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/bmiddle/df755665gw1evwjtsg566j20k00zkdib.jpg">
+<meta property="og:updated_time" content="2016-09-05T07:24:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MummyDing's Blog">
-<meta name="twitter:description" content="95/Android开发/猪厂打杂">
+<meta name="twitter:title" content="基于融云SDK的即时聊天工具">
+<meta name="twitter:description" content="一直想做一个类似QQ的聊天APP，先是仿了QQ的UI(详见【Android】高仿QQ 5.0+ UI),现在借助第三方服务实现了聊天功能。在知乎上看到有人也在问如何实现一个IM，如果完全自己做，还得去了解一些通信协议，于是偷懒使用了第三方的服务。虽说底层的通信不需要自己管，但其他的编码量也并不小，前后花了一个多礼拜。(当然也是自己学艺不精)关于融云，我引用我在知乎上的一段回答:">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151117150127981?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +67,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | MummyDing&#39;s Blog</title>
+<title>基于融云SDK的即时聊天工具 | MummyDing&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -65,8 +77,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -288,407 +300,209 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-【Android】基于融云SDK的即时聊天工具" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/" class="article-date">
+      <time datetime="2015-09-10T10:29:00.000Z" itemprop="datePublished">2015-09-10</time>
+</a>
+
+
+    </div>
   
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于融云SDK的即时聊天工具
+    </h1>
+  
+
+      </header>
       
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Design/">Material Design</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/08/20/网易实习第一阶段简单回顾/" class="archive-article-date">
-      <time datetime="2016-08-20T03:56:00.000Z" itemprop="datePublished">08-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程作者/">【Others】爱编程作者</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习/">实习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/" class="archive-article-date">
-      <time datetime="2016-05-10T11:27:00.000Z" itemprop="datePublished">05-10</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】读书笔记/">【Others】读书笔记</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/05/［读书笔记］Clean Code （1-8章）/" class="archive-article-date">
-      <time datetime="2016-05-05T13:05:00.000Z" itemprop="datePublished">05-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】读书笔记/">【Others】读书笔记</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/" class="archive-article-date">
-      <time datetime="2016-04-01T11:37:00.000Z" itemprop="datePublished">04-01</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程/">【Others】爱编程</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习生/">实习生</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/" class="archive-article-date">
-      <time datetime="2016-02-09T16:31:00.000Z" itemprop="datePublished">02-10</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/" class="archive-article-date">
-      <time datetime="2016-01-05T12:10:00.000Z" itemprop="datePublished">01-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程/">【Others】爱编程</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2015/">2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2016/">2016</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+          
+        <p>一直想做一个类似QQ的聊天APP，先是仿了QQ的UI(详见<a href="http://blog.csdn.net/mummyding/article/details/47708203" target="_blank" rel="external">【Android】高仿QQ<br> 5.0+ UI</a>),现在借助第三方服务实现了聊天功能。在知乎上看到有人也在问如何实现一个IM，如果完全自己做，还得去了解一些通信协议，于是偷懒使用了第三方的服务。虽说底层的通信不需要自己管，但其他的编码量也并不小，前后花了一个多礼拜。(当然也是自己学艺不精)<br>关于融云，我引用我在知乎上的一段回答:<a id="more"></a><br>偷懒使用了第三方的服务融云[当然类似的有好多,比如环信]，它提供了私聊,聊天室，群,客服等模式。有两个库可供选择imkit和imlib.imkit内置了一些做好的界面，你只需要整合到自己的APP中即可。imlib提供的是一些基本的功能类，不包括界面，对界面等定制要求高可以使用这个。界面什么的都要自己写，工作量相对大，个人建议直接使用imkit就好。融云提供了iOS和Android两个版本的库[我相信你不需要做1%]，提供的功能大同小异。不过用户信息管理，用户关系等都需要自己的服务器维护，融云的服务器消息的收发。<br>使用融云你需要自己搭建一个简单的服务器维护用户信息，将融云提供的组件整合到你的APP中。更多的细节可以去看融云的文档。<br>服务器端我是临时学了Java Web后搭的，逻辑并不复杂。、</p>
+<ul>
+<li>界面遵循Google的 Material Design 规范，关于Material Design的教程可以参考 www.android4devs.com(被GFW,请自备梯子)。</li>
+<li>配色可以借助<a href="http://www.materialpalette.com/" target="_blank" rel="external">http://www.materialpalette.com/</a> 这样就可以专心写代码基本不为界面发愁了→_→  </li>
+<li>Material Design 风格的图标可以直接到<a href="http://www.icons4android.com/" target="_blank" rel="external">http://www.icons4android.com/</a> 下载</li>
+<li>其他关于融云SDK的使用直接到查阅官网文档，同时也可以向他们发”工单”寻求帮助</li>
+</ul>
+<p>这样基本就搞定了～_~<br>业务逻辑图:<br><img src="http://img.blog.csdn.net/20151117150127981?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20151117150149716?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20151117150208437?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20151117150224732?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>下面是应用效果截图:<br><img src="http://ww4.sinaimg.cn/bmiddle/df755665gw1evwjtpvm3ej20k00zk76h.jpg" alt=""><img src="http://ww4.sinaimg.cn/bmiddle/df755665gw1evwjtr9azrj20k00zk76k.jpg" alt=""><img src="http://ww3.sinaimg.cn/bmiddle/df755665gw1evwjtrxucaj20k00zkgmz.jpg" alt=""><img src="http://ww1.sinaimg.cn/bmiddle/df755665gw1evwjtt4b9rj20k00zk76v.jpg" alt=""></p>
+<p><img src="http://ww3.sinaimg.cn/bmiddle/df755665gw1evwjtumh95j20k00zktb3.jpg" alt=""><img src="http://ww3.sinaimg.cn/bmiddle/df755665gw1evwjtsg566j20k00zkdib.jpg" alt=""></p>
+<p>完整代码:<a href="https://github.com/MummyDing/FunnyChat-IM" target="_blank" rel="external"> https://github.com/MummyDing/FunnyChat-IM</a></p>
+<p>【转载请注明出处】<br>Author: MummyDing</p>
+
       
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" class="archive-article-date">
-      <time datetime="2015-12-11T11:22:00.000Z" itemprop="datePublished">12-11</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a><a class="article-category-link" href="/categories/【Android】APP/【Android】分享/">【Android】分享</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源/">开源</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" class="archive-article-date">
-      <time datetime="2015-11-05T13:04:00.000Z" itemprop="datePublished">11-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a><a class="article-category-link" href="/categories/【Android】UI/【Android】分享/">【Android】分享</a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">MummyDing</a></p>
+        <p><span>发布时间:</span>2015-09-10, 18:29:00</p>
+        <p><span>最后更新:</span>2016-09-05, 15:24:33</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/" title="基于融云SDK的即时聊天工具">https://mummyding.github.io/2015/09/10/【Android】基于融云SDK的即时聊天工具/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://mummyding.github.io/2015/09/10/【Android】基于融云SDK的即时聊天工具/　　作者: MummyDing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片选择器/">图片选择器</a></li></ul>
-    </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/10/20/【Android】Android Studio 使用第三方类库/" class="archive-article-date">
-      <time datetime="2015-10-20T08:21:00.000Z" itemprop="datePublished">10-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】分享/">【Android】分享</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类库/">类库</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/" class="archive-article-date">
-      <time datetime="2015-09-18T10:21:00.000Z" itemprop="datePublished">09-18</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/课程表/">课程表</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">
+                    课程表布局实现(支持动态添加课程)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">
+                    高仿QQ 5.0+ UI
+                </a>
+            </div>
+        
     </nav>
-  
 
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"基于融云SDK的即时聊天工具　| MummyDing's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2015/09/10/【Android】基于融云SDK的即时聊天工具/" data-title="基于融云SDK的即时聊天工具" data-url="https://mummyding.github.io/2015/09/10/【Android】基于融云SDK的即时聊天工具/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"MummyDing"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/" title="上一篇: 课程表布局实现(支持动态添加课程)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/08/16/【Android】高仿QQ 5.0+ UI/" title="下一篇: 高仿QQ 5.0+ UI">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

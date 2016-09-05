@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="MummyDing" />
+
+
+
+<meta name="description" content="现在凡是设计到图片上传的 Android App 一般都免不了”图片选择器”的模块。偷懒的直接调用系统的图库让用户一张一张的添加(比如知乎)，但大多数还是自己造轮子实现一次添加多张图片的功能。在这块，腾讯系的一些App都做的不错，图片加载速度非常块丝毫没有卡顿之感，还支持图片预览和编辑。现在自己手头上在做的一个项目也涉及到了这个，本来是调用系统图库，但是我觉得每次都只能添加一张体验并不好，于是准备">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多图选择器(支持图片预览 高效加载不怕OOM)">
+<meta property="og:url" content="https://mummyding.github.io/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/index.html">
+<meta property="og:site_name" content="MummyDing's Blog">
+<meta property="og:description" content="现在凡是设计到图片上传的 Android App 一般都免不了”图片选择器”的模块。偷懒的直接调用系统的图库让用户一张一张的添加(比如知乎)，但大多数还是自己造轮子实现一次添加多张图片的功能。在这块，腾讯系的一些App都做的不错，图片加载速度非常块丝毫没有卡顿之感，还支持图片预览和编辑。现在自己手头上在做的一个项目也涉及到了这个，本来是调用系统图库，但是我觉得每次都只能添加一张体验并不好，于是准备">
+<meta property="og:image" content="http://img.blog.csdn.net/20151105172019886?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151105171943360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151105210747497?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151105205725786?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-09-05T07:24:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多图选择器(支持图片预览 高效加载不怕OOM)">
+<meta name="twitter:description" content="现在凡是设计到图片上传的 Android App 一般都免不了”图片选择器”的模块。偷懒的直接调用系统的图库让用户一张一张的添加(比如知乎)，但大多数还是自己造轮子实现一次添加多张图片的功能。在这块，腾讯系的一些App都做的不错，图片加载速度非常块丝毫没有卡顿之感，还支持图片预览和编辑。现在自己手头上在做的一个项目也涉及到了这个，本来是调用系统图库，但是我觉得每次都只能添加一张体验并不好，于是准备">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151105172019886?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="MummyDing&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>多图选择器(支持图片预览 高效加载不怕OOM) | MummyDing&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?be11afd3596504a0dc0ea401f7154654";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">MummyDing</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android Developer</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/tags/推荐/">推荐</a></li>
+                        
+                            <li><a href="/tags/随笔/">随笔</a></li>
+                        
+                            <li><a href="/tags/MummyDing">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/">ImageView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ListView/">ListView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOM/">OOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ/">QQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ-UI/">QQ UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManage/">WindowManage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格手势/">九宫格手势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/侧滑菜单/">侧滑菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片选择器/">图片选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圆形头像/">圆形头像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习生/">实习生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源/">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/">推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/桌面歌词/">桌面歌词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类库/">类库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易/">网易</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程表/">课程表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kevinwu.cn/">KevinWu.CN</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ddragonever.com/">Ddragon&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.kdwycz.com/">kdwycz&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://mkfmiku.github.io/">KFBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.lattez.club/">Latte_z</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">95/Android开发/猪厂打杂</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">MummyDing</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">MummyDing</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android Developer</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/tags/推荐/">推荐</a></li>
+                
+                    <li><a href="/tags/随笔/">随笔</a></li>
+                
+                    <li><a href="/tags/MummyDing">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-【Android】多图选择器(支持图片预览 高效加载不怕OOM)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" class="article-date">
+      <time datetime="2015-11-05T13:04:00.000Z" itemprop="datePublished">2015-11-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      多图选择器(支持图片预览 高效加载不怕OOM)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a><a class="article-category-link" href="/categories/【Android】UI/【Android】分享/">【Android】分享</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片选择器/">图片选择器</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>现在凡是设计到图片上传的 Android App 一般都免不了”图片选择器”的模块。偷懒的直接调用系统的图库让用户一张一张的添加(比如知乎)，但大多数还是自己造轮子实现一次添加多张图片的功能。在这块，腾讯系的一些App都做的不错，图片加载速度非常块丝毫没有卡顿之感，还支持图片预览和编辑。现在自己手头上在做的一个项目也涉及到了这个，本来是调用系统图库，但是我觉得每次都只能添加一张体验并不好，于是准备自己写一个换掉。目前实现的效果就是多图选择预览,预览支持图片手势缩放。<a id="more"></a><br>视频演示地址:<a href="http://v.youku.com/v_show/id_XMTM3ODM3MzcyMA==.html?firsttime=0&amp;from=y1.4-2" target="_blank" rel="external">http://v.youku.com/v_show/id_XMTM3ODM3MzcyMA==.html?firsttime=0&amp;from=y1.4-2</a><br>gif 图 制作出了点问题，暂时先放几张效果图<br>       <img src="http://img.blog.csdn.net/20151105172019886?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="">       <img src="http://img.blog.csdn.net/20151105171943360?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>         <img src="http://img.blog.csdn.net/20151105210747497?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>     功能貌似并不难，但是实际实现过程中还是会遇到一些问题<br>大致思路:</p>
+<ol>
+<li>图片是通过系统提供的Content Provider 读取的，获取到的是图片对应的Uri</li>
+<li>采用GridView 用于布局图片：<br>1) 已选图片的Item 布局就是2个ImageView，一个用来防止图片，一个用作删除按钮。<br>2) 选择图片页面的Item布局是一个ImageView 和 一个CheckBox<br>3.图片的加载使用的是强大的第三方图片缓存库<a href="https://github.com/facebook/fresco/" target="_blank" rel="external">Fresco</a>,预览图片是使用第三方库<a href="https://github.com/jasonpolites/gesture-imageview" target="_blank" rel="external">Gesture-ImageView</a> 用于支持图片    的手势缩放。 开始图片的加载使用的是<a href="https://github.com/square/picasso" target="_blank" rel="external">Picasso</a> ,但滚动的时候会有卡顿，改用Fresco后近千张图 随便滑。<br>4.Activity 之间的跳转需要传递“被选图片”列表 ArrayList<imagebean>,这里的ImageBean是我自定义的， 用于存储图    片信息。这里要注意的是ImageBean 要实现Serializable 接口，同时ImageBean中所有的属性必须是基本数据类型      或者是实现了Serializable接口的对象。这样传递ArrayList<imagebean><br>再加一个Serializable强转就可以了。<br>具体代码如下:</imagebean></imagebean></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by mummyding on 15-11-3.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageBean</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> String imageUri;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isChecked;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> ID;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getID</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ID;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> ImageBean <span class="title">setID</span><span class="params">(<span class="keyword">int</span> ID)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.ID = ID;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getImageUri</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> imageUri;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> ImageBean <span class="title">setImageUri</span><span class="params">(String imageUri)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.imageUri = imageUri;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isChecked</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> isChecked;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIsChecked</span><span class="params">(<span class="keyword">boolean</span> isChecked)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.isChecked = isChecked;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>查了下，Uri是没有实现Serializable接口的，于是就存储Uri对应的字符串，这里使用实现了Serializable的String。<br>5.前面说到了，选择图片界面中的Item 我是使用ImageView + CheckBox，这里有大坑！！！ 你点击GridView的CheckBox再向下翻几页后你会发现你本没有选的CheckBox也处于选中状态，然后你再滑回去之前本被你选中的CheckBox 可能又处于非选中状态，CheckBox的状态是混乱的！！ 不仅仅是GridView，ListView也会出现这种情况，它俩继承的是同一个父类。这是由于它们的重用机制导致的。于是我这里是在getView中从ImageBean中获取状态值再手动设置CheckBox状态。</p>
+<ol>
+<li>选择图片界面的预览图片我是使用OnItemClick触发的，但是这里的CheckBox会”夺去”Item的焦点，导致       OnItemClick无法响应。我们可以在XML中将CheckBox的focusable属性设为false。</li>
+<li>预览图片的时候需要提供图片格式，也就是说要根据Uri 找到原图。显然，直接读取原图很可能造成OOM，所以我   在读取的时候是读取它的缩略图(宽度与手机屏幕大小一直)。其中使用到的方法之前在<a href="http://blog.csdn.net/mummyding/article/details/47706397" target="_blank" rel="external">【Android】自定义圆形ImageView(圆形头像<br>可指定大小)</a> 有使用到。</li>
+</ol>
+<p>最后附上项目中类 截图<br><img src="http://img.blog.csdn.net/20151105205725786?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>当然，这个Demo实际上细节还不少，需要自己动手才清楚。</p>
+<p>———————————–update 2015.11.08——————————–<br>更换了图片预览手势缩放控件 将<a href="https://github.com/jasonpolites/gesture-imageview" target="_blank" rel="external">Gesture-ImageView</a> 换成了更加强大的<a href="https://github.com/bm-x/PhotoView" target="_blank" rel="external">PhotoView</a>。<br>现在还要借助这些优秀的开源库，现在要逐步自己实现了～_~</p>
+<p>完整代码: <a href="https://github.com/MummyDing/MultiImageChooser/" target="_blank" rel="external">https://github.com/MummyDing/MultiImageChooser/</a> </p>
+<p>【转载请注明出处】</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">MummyDing</a></p>
+        <p><span>发布时间:</span>2015-11-05, 21:04:00</p>
+        <p><span>最后更新:</span>2016-09-05, 15:24:14</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" title="多图选择器(支持图片预览 高效加载不怕OOM)">https://mummyding.github.io/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://mummyding.github.io/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/　　作者: MummyDing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">
+                    闲暇(Leisure) 阅读类应用的开发
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/10/20/【Android】Android Studio 使用第三方类库/">
+                    Android Studio 使用第三方类库
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"多图选择器(支持图片预览 高效加载不怕OOM)　| MummyDing's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" data-title="多图选择器(支持图片预览 高效加载不怕OOM)" data-url="https://mummyding.github.io/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"MummyDing"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" title="上一篇: 闲暇(Leisure) 阅读类应用的开发">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/10/20/【Android】Android Studio 使用第三方类库/" title="下一篇: Android Studio 使用第三方类库">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 MummyDing
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 2;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

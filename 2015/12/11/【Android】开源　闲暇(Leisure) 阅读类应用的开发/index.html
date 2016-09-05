@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="MummyDing" />
+
+
+
+<meta name="description" content="今年暑假，Android大概学了两个月左右，很想做一款”能投入使用的App”。但是一没好的点子，二技术也不咋地，后来看到一个图灵机器人的接口，于是就花了一两天的时间写了一个”聊天机器人”发市场上了。显然，算不上什么”像样”的应用。开学后，随着对Android 的了解越来越深，想做出个“像样的App”的想法就愈发强烈。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闲暇(Leisure) 阅读类应用的开发">
+<meta property="og:url" content="https://mummyding.github.io/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/index.html">
+<meta property="og:site_name" content="MummyDing's Blog">
+<meta property="og:description" content="今年暑假，Android大概学了两个月左右，很想做一款”能投入使用的App”。但是一没好的点子，二技术也不咋地，后来看到一个图灵机器人的接口，于是就花了一两天的时间写了一个”聊天机器人”发市场上了。显然，算不上什么”像样”的应用。开学后，随着对Android 的了解越来越深，想做出个“像样的App”的想法就愈发强烈。">
+<meta property="og:image" content="http://img.blog.csdn.net/20151211190440746?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151211190529903?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20151211190601056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-09-05T07:40:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="闲暇(Leisure) 阅读类应用的开发">
+<meta name="twitter:description" content="今年暑假，Android大概学了两个月左右，很想做一款”能投入使用的App”。但是一没好的点子，二技术也不咋地，后来看到一个图灵机器人的接口，于是就花了一两天的时间写了一个”聊天机器人”发市场上了。显然，算不上什么”像样”的应用。开学后，随着对Android 的了解越来越深，想做出个“像样的App”的想法就愈发强烈。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151211190440746?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="MummyDing&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>闲暇(Leisure) 阅读类应用的开发 | MummyDing&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?be11afd3596504a0dc0ea401f7154654";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">MummyDing</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android Developer</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/tags/推荐/">推荐</a></li>
+                        
+                            <li><a href="/tags/随笔/">随笔</a></li>
+                        
+                            <li><a href="/tags/MummyDing">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/">ImageView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ListView/">ListView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOM/">OOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ/">QQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ-UI/">QQ UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManage/">WindowManage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格手势/">九宫格手势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/侧滑菜单/">侧滑菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片选择器/">图片选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圆形头像/">圆形头像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习生/">实习生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源/">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/">推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/桌面歌词/">桌面歌词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类库/">类库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易/">网易</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程表/">课程表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kevinwu.cn/">KevinWu.CN</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ddragonever.com/">Ddragon&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.kdwycz.com/">kdwycz&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://mkfmiku.github.io/">KFBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.lattez.club/">Latte_z</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">95/Android开发/猪厂打杂</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">MummyDing</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">MummyDing</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android Developer</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/tags/推荐/">推荐</a></li>
+                
+                    <li><a href="/tags/随笔/">随笔</a></li>
+                
+                    <li><a href="/tags/MummyDing">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-【Android】开源　闲暇(Leisure) 阅读类应用的开发" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" class="article-date">
+      <time datetime="2015-12-11T11:22:00.000Z" itemprop="datePublished">2015-12-11</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      闲暇(Leisure) 阅读类应用的开发
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a><a class="article-category-link" href="/categories/【Android】APP/【Android】分享/">【Android】分享</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源/">开源</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>今年暑假，Android大概学了两个月左右，很想做一款”能投入使用的App”。但是一没好的点子，二技术也不咋地，后来看到一个图灵机器人的接口，于是就花了一两天的时间写了一个”聊天机器人”发市场上了。显然，算不上什么”像样”的应用。开学后，随着对Android 的了解越来越深，想做出个“像样的App”的想法就愈发强烈。<a id="more"></a><br>　９月底,小kd说想合作做我们学校的App。他负责后台，我负责客户端。一个人负责，身边没有有经验的人，心里也是没底的。后来断断续续折腾了几个礼拜，大概的框架倒也搭出来了，其中几个功能性的模块我单独拉出来开源了。在这款应用的开发中，深感Java语言底子不足 &amp; 代码不够规范 ,于是在此期间又看了 Core Java 、大话设计模式、设计模式之禅、Thinking in Java　之类的书籍，收获很大。其实类似的书籍在之前也看过，但是书上讲的东西在平时很少用到，很难理解到其中的精妙之处。(在用中学，学以致用，这是我目前比较认同的学习方法)　10月下旬的时候，小kd离开原来实习的公司到了一家创业公司。还是实习(转正压力<br> 前几天才拿到正式offer)，工作比较忙后台的开发也就一直搁置了。我这边客户端的界面已经搭好了，后台没有提供数据接口我也不能继续下去了，然后就琢磨着下一个App.<br>   这个时候基本的Android开发知识已经不是问题了，重要的是做什么。首先，我想这个App能够覆盖到常用的Android 相关知识，对综合能力要求不能太低，能够起到练手的作用。其次，做出来得有实际用途并且能够用，不能再像以前的toy program　一样了。确定这两点，我就去一些Android 群里问了，同时也咨询了一些学长，然而并没有得到比较满意的建议。(有点心塞啊)　没有好的点子做，总不能闲着。翻了下GitHub，之前fork了BlackLight(一个第三方微博客户端)，下下来跑了下，貌似还不错的样子~_~　里边的代码的层次结构也非常清晰，我尝试把整个工程的结构理了一边，受益匪浅。<br>　11月初，在一个程序员社区看到有人分享了自己开发的一款应用。里边有新闻、视频、图片之类的模块，dang~　就它了！当晚就各种查查查，初步写了App的大概结构:</p>
+<ol>
+<li>新闻 —- 新华网 RSS2. 阅读 —- 豆瓣开放API3. 科技 —- 果壳4. 视频 —- 土豆5. 音乐 —– 待定<br>　　定好这些就开始编码了，一步一步来。首先测试各个接口，在视频和音乐这里遇到点障碍。视频网站顶多是提供一个H5播放页面(或是swf　然而Android不支持)，广告一堆，显然用户体验很差，还不如直接去下官方的客户端。音乐这块，版权问题，貌似没有看到公开的Api,有找到别人抓包搞到的－－－这不大好吧(~_~)　这两个模块就砍掉了。剩下三个都是阅读相关，干脆就当阅读类的应用去做了。又去搜接口(个人开发者，，尴尬啊，没有后台，只能依赖开放Api了…不管,练技术是关键＝＝＝)——最后是加了一个知乎日报。接口测试完毕后，就进入正式编码过程了。之前没什么经验，代码复用这块做的不好，基本上是写几个模块就重构一次。总体上来说，这段还算顺利，接下来是做”数据持久化”(缓存哈)。这款是学习BlackLight,派上用场了，之前我用到数据库是直接使用第三方的库，SQL语句都不用写。不过这次直接操作SQlite也并没有觉得复杂，结构较为清晰得益于BlackLight。<br>　　基本数据展示完成后发现App存在内存泄露，很容易就奔溃掉，一个礼拜之后才把位置排查出来解决…　之前从没有遇到过这类问题，学习了。之后又添加了设置以及关于，给朋友测试，修bug，今天正式发布。由于我的App中包含新闻内容，一些市场不允许个人开发者发布新闻类应用，所以目前还只在豌豆荚上架。<br>应用介绍:</li>
+</ol>
+<p>##闲暇(Leisure)</p>
+<p>　闲暇(Leisure)是一款集”知乎日报”、“果壳科学人”、“新华网新闻”以及“豆瓣图书”于一体的阅读类Android应用。 果壳、知乎和豆瓣在国内拥有大量用户，这些社区的用户每天都产生很多高质量内容。闲暇以其简介的风格将这几大社区 的优质内容整合于一体，使得用户能有效地获取这些内容，大大节省了用户的时间。<br>它主要分为以下几个模块:</p>
+<ol>
+<li>日报: 数据来源于知乎日报RSS，内容精选自知乎优质答案。</li>
+<li>阅读:接入豆瓣图书API，将图书进行分类展现并且支持搜索功能，部分图书还提供了电子书。</li>
+<li>新闻:数据来源于新华网RSS，第一时间获取最新资讯。其内容简洁真实权威，相对于国内一些娱乐化新闻平台，更加严肃务实。</li>
+<li>科学:接入果壳网API，果壳网作为一个开放、多元的泛科技兴趣社区，吸引了百万名有意思、爱知识、乐于分享的年轻人聚集在这里，用知识创造价值，为生活添加智趣。</li>
+<li>收藏:用户收藏内容，方便用户保存优质内容。</li>
+<li>个性化设置:</li>
+</ol>
+<ul>
+<li>夜间模式: 方便用户在光线较弱或是黑暗环境下阅读，减弱屏幕光线对眼睛的刺激</li>
+<li>搜索:图书搜索功能提供关键字搜索和类别搜索模式，用户可以自行选择</li>
+<li>摇晃返回:用户可以通过轻轻晃动手机触发页面返回。此功能可由用户自行设置是否开启</li>
+<li>退出确认:该功能默认开启，按两次返回键退出应用，防止用户误触返回键退出应用</li>
+<li>无图模式:仅在WIFI模式下加载图片，节省用户数据流量</li>
+<li>自动刷新:开启该功能后，在WIFI下自动刷新，获取最新内容</li>
+<li>语言:　支持繁简中文和英文，满足用户语言习惯</li>
+<li>清除缓存:用户可以手动清除缓存，节约手机存储空间</li>
+</ul>
+<p>MainActivity: 入口界面。做一些初始化的工作，加载应用整体框架，负责基本子界面的切换。<br>BaseListFragment：列表界面基类。定制性强，可自定义是否启用头部导航布局　下拉刷新等组件<br>AsbtopNavigationFragment:　头部导航布局基类,继承它即可管理头部导航布局。<br>BaseAdapter: RecyclerView　的Adapter基类<br>– BaseCache 主模块数据缓存基类　<br>ICache—　缓存接口<br>– BaseCollectionCache　收藏模块缓存基类</p>
+<p>#<a href="https://github.com/MummyDing/Leisure#版本更新" target="_blank" rel="external"></a>版本更新<br><strong>2015-12-12 初版(1.0)完成</strong><br><strong>2015-12-24 Version 1.1 版发布</strong><br>0.初版发布之后收到了很多朋友的反馈,在此表示感谢!<br>由于最近比较忙,在第一版中日报数据服务器不稳定等问题准备放在第三个版本中.<br>1.这版的更新主要是修复一个严重的bug:数据冗余,刷新后之前数据没有被清除,新老数据出现重复.下载更新版本后,手动刷新即可获取正确数据. 2.软件开发靠开发者一人之力是不够的,MummyDing希望各位也能参与进来,让”闲暇”越来越好!<br>3.Bug反馈即可在评论区留言,同时也可到项目主页发布issue:<a href="https://github.com/MummyDing/Leisure/issues" target="_blank" rel="external">https://github.com/MummyDing/Leisure/issues</a><br>本项目为开源项目,技术交流可以通过邮箱联系:<a href="mailto:MummyDing@outlook.com" target="_blank" rel="external">MummyDing@outlook.com</a><br><strong>2016-01-03 Version 2.0 版发布</strong><br>上次的更新比较失败,导致不少新bug.这次经过更严谨的测试,主要做了以下改进:</p>
+<ol>
+<li>日报数据更加可靠,响应速度明显提升,内容更加丰富.</li>
+<li>日报页面更加美观,体验更好</li>
+<li>修复列表缓存不全bug</li>
+<li>修复收藏bug</li>
+<li>各模块列表UI做了优化</li>
+<li>优化夜间模式<br>本次更新更侧重于修复之前的bug,UI上的美化将放在之后的版本中.<br>个人开发者业余开发,更新不及时请见谅,感谢支持.<br>项目地址: <a href="https://github.com/MummyDing/Leisure" target="_blank" rel="external">https://github.com/MummyDing/Leisure</a></li>
+</ol>
+<p>#<a href="https://github.com/MummyDing/Leisure#源码打包下载" target="_blank" rel="external"></a>源码打包下载</p>
+<ol>
+<li><a href="https://github.com/MummyDing/Leisure/archive/v1.0.zip" target="_blank" rel="external">Version 1.0</a></li>
+<li><a href="https://github.com/MummyDing/Leisure/archive/v1.1.zip" target="_blank" rel="external">Version 1.1</a></li>
+<li><a href="https://github.com/MummyDing/Leisure/archive/v2.0.zip" target="_blank" rel="external">Version 2.0</a></li>
+</ol>
+<ul>
+<li></li>
+</ul>
+<p>应用截图:<br>    <img src="http://img.blog.csdn.net/20151211190440746?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="">                <img src="http://img.blog.csdn.net/20151211190529903?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br>                  <img src="http://img.blog.csdn.net/20151211190601056?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>项目中，几个重要类的简单介绍(文末附源码地址)<br>MainActivity: 入口界面。做一些初始化的工作，加载应用整体框架，负责基本子界面的切换。<br>BaseListFragment：列表界面基类。定制性强，可自定义是否启用头部导航布局　下拉刷新等组件<br>AsbtopNavigationFragment:　头部导航布局基类,继承它即可管理头部导航布局。<br>BaseAdapter: RecyclerView　的Adapter基类<br>                –BaseCache 主模块数据缓存基类<br>ICache —　缓存接口<br>                –BaseCollectionCache　收藏模块缓存基类</p>
+<p>当然，这个项目毕竟我写了这么久，没法详细说，具体得自己看源码了。</p>
+<p>酷安应用市场下载地址:<a href="http://coolapk.com/apk/com.mummyding.app.leisure" target="_blank" rel="external">http://coolapk.com/apk/com.mummyding.app.leisure</a><br>小米应用商店下载地址: <a href="http://app.mi.com/detail/130045" target="_blank" rel="external">http://app.mi.com/detail/130045</a><br>豌豆荚应用市场下载地址: <a href="http://www.wandoujia.com/apps/com.mummyding.app.leisure" target="_blank" rel="external">http://www.wandoujia.com/apps/com.mummyding.app.leisure</a><br>360应用市场下载地址:<a href="http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&amp;id=3167599" target="_blank" rel="external">http://m.app.so.com/detail/index?pname=com.mummyding.app.leisure&amp;id=3167599</a></p>
+<p>【转载请注明出处】</p>
+<p>GitHub项目地址: <a href="https://github.com/MummyDing/Leisure/" target="_blank" rel="external">https://github.com/MummyDing/Leisure/  </a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">MummyDing</a></p>
+        <p><span>发布时间:</span>2015-12-11, 19:22:00</p>
+        <p><span>最后更新:</span>2016-09-05, 15:40:43</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" title="闲暇(Leisure) 阅读类应用的开发">https://mummyding.github.io/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://mummyding.github.io/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/　　作者: MummyDing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">
+                    迟到的2015年终总结--初入工程开发
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">
+                    多图选择器(支持图片预览 高效加载不怕OOM)
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"闲暇(Leisure) 阅读类应用的开发　| MummyDing's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" data-title="闲暇(Leisure) 阅读类应用的开发" data-url="https://mummyding.github.io/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"MummyDing"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/" title="上一篇: 迟到的2015年终总结--初入工程开发">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" title="下一篇: 多图选择器(支持图片预览 高效加载不怕OOM)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 MummyDing
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 2;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

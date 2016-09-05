@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="MummyDing" />
+
+
+
+<meta name="description" content="前几天顺哥面试的时候碰到HR明确说我转正答辩通过，趁此机会对这段时间的工作做个梳理。面试经历之前在已经在 Android实习生面试记录－蘑菇街、网易等 写了，结果就是网易发了offer，蘑菇街拿到终面机会但是我没去面:5月4号入职网易，同时蘑菇街通知5月5号现场终面(第五面…)。那天上午办完入职手续后顺哥来接，正在电梯间接到蘑菇街HR电话确认是否能够去终面，根本不确定是否可以请假&amp;amp;感觉刚入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网易实习第一阶段简单回顾">
+<meta property="og:url" content="https://mummyding.github.io/2016/08/20/网易实习第一阶段简单回顾/index.html">
+<meta property="og:site_name" content="MummyDing's Blog">
+<meta property="og:description" content="前几天顺哥面试的时候碰到HR明确说我转正答辩通过，趁此机会对这段时间的工作做个梳理。面试经历之前在已经在 Android实习生面试记录－蘑菇街、网易等 写了，结果就是网易发了offer，蘑菇街拿到终面机会但是我没去面:5月4号入职网易，同时蘑菇街通知5月5号现场终面(第五面…)。那天上午办完入职手续后顺哥来接，正在电梯间接到蘑菇街HR电话确认是否能够去终面，根本不确定是否可以请假&amp;amp;感觉刚入">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820115921004?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820120017137?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820120101732?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820120137427?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820120216843?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820120250552?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20160820120321814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-09-05T07:43:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网易实习第一阶段简单回顾">
+<meta name="twitter:description" content="前几天顺哥面试的时候碰到HR明确说我转正答辩通过，趁此机会对这段时间的工作做个梳理。面试经历之前在已经在 Android实习生面试记录－蘑菇街、网易等 写了，结果就是网易发了offer，蘑菇街拿到终面机会但是我没去面:5月4号入职网易，同时蘑菇街通知5月5号现场终面(第五面…)。那天上午办完入职手续后顺哥来接，正在电梯间接到蘑菇街HR电话确认是否能够去终面，根本不确定是否可以请假&amp;amp;感觉刚入">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160820115921004?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="MummyDing&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>网易实习第一阶段简单回顾 | MummyDing&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?be11afd3596504a0dc0ea401f7154654";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">MummyDing</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android Developer</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/tags/推荐/">推荐</a></li>
+                        
+                            <li><a href="/tags/随笔/">随笔</a></li>
+                        
+                            <li><a href="/tags/MummyDing">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/">ImageView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ListView/">ListView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOM/">OOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ/">QQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ-UI/">QQ UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManage/">WindowManage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格手势/">九宫格手势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/侧滑菜单/">侧滑菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片选择器/">图片选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圆形头像/">圆形头像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习生/">实习生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源/">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/">推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/桌面歌词/">桌面歌词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类库/">类库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易/">网易</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程表/">课程表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kevinwu.cn/">KevinWu.CN</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ddragonever.com/">Ddragon&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.kdwycz.com/">kdwycz&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://mkfmiku.github.io/">KFBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.lattez.club/">Latte_z</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">95/Android开发/猪厂打杂</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">MummyDing</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">MummyDing</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android Developer</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/tags/推荐/">推荐</a></li>
+                
+                    <li><a href="/tags/随笔/">随笔</a></li>
+                
+                    <li><a href="/tags/MummyDing">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-网易实习第一阶段简单回顾" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/20/网易实习第一阶段简单回顾/" class="article-date">
+      <time datetime="2016-08-20T03:56:00.000Z" itemprop="datePublished">2016-08-20</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网易实习第一阶段简单回顾
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/【Others】爱编程作者/">【Others】爱编程作者</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习/">实习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>前几天顺哥面试的时候碰到HR明确说我转正答辩通过，趁此机会对这段时间的工作做个梳理。面试经历之前在已经在 <strong><a href="http://blog.csdn.net/mummyding/article/details/51037084" target="_blank" rel="external"></a><a href="http://blog.csdn.net/mummyding/article/details/51037084" target="_blank" rel="external">Android实习生面试记录－蘑菇街、网易等</a> </strong>写了，结果就是网易发了offer，蘑菇街拿到终面机会但是我没去面:5月4号入职网易，同时蘑菇街通知5月5号现场终面(第五面…)。那天上午办完入职手续后顺哥来接，正在电梯间接到蘑菇街HR电话确认是否能够去终面，根本不确定是否可以请假&amp;感觉刚入职又去面试不大好就拒了。过了几个礼拜蘑菇街HR又给我打电话说北京有面试问我去不去，虽然感动但还是拒了。<br><a id="more"></a></p>
+<p><strong>开始阶段</strong><br>   入职第一天,领机器配环境，自由网络一切都很爽。完事后老大扔了一本Clean Code 给我看了两天<br> </p>
+<ul>
+<li><a href="http://blog.csdn.net/mummyding/article/details/51326238" target="_blank" rel="external">［读书笔记］Clean  Code(1-8章)</a></li>
+<li><a href="http://blog.csdn.net/mummyding/article/details/51365846" target="_blank" rel="external">［读书笔记］Clean Code（8-完结）</a><br>之后就是熟悉工程源码看看git提交规范什么的，一周时间在周会的时候做了个汇报。项目还是蛮大的，当时住公司晚上待到九十点走也仅仅是看了个皮毛，深入细节的话一个礼拜还是不够的。汇报的时候也列出了我看源码的步骤还画了个大大的类图(第一次尝试<br><img src="" alt="">       <img src="http://img.blog.csdn.net/20160820115921004?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><img src="" alt=""></li>
+</ul>
+<p><strong>开发阶段</strong><br><strong>1. 企业云课堂</strong><br>    了解了怎么提代码，怎么写代码以及熟悉了项目源码后，正好又要开始新的需求。顺哥分了点任务给我，叫我先做设计。这点是与我之前写代码是很不一样的，一种“野路子”碰上正规军的感觉。以前自己做项目，基本就是把功能确定在纸上大概画画UI，然后脑子稍微想想怎么实现哪些地方可以复用大概的架子是怎样的就开始写代码了。有时候遇到问题就边做变查，甚至半路发现之前没有考虑到的点但却发现一时半会解决不了可能就可耻地改需求了。反正是自己做的东西，既是运动员又是裁判员~_~<br>  对于一些书上讲的UML不屑一顾，嫌麻烦。但现在不一样，我面对的是一个商业产品:需求是确定的，不能说改就改;你需要对你的每一行代码负责,保证产品完成的质量。就这样开始了第一次开发的设计。<br>    其实还好，这次做的是网易云课堂企业版的第一个版本。企业版是针对企业的相对于线上的网易云课堂业务复杂度更小，好多东西都是可以复用的。因此也将相关的代码深入看了下，主要对比不同的地方，另外看当前的代码有哪些可以借鉴以及改进的点。照着这个思路做了自己的设计，在此期间@HY 同学也是提供了很大的帮助。设计的同时还要和后端沟通定接口。弄完后给顺哥看毫无悬念地——被打回来了。主要是UML详略不得当，一些关键的点没有体现出来。改过之后基本符合要求过了设计评审，然后还是在@HY的帮助下进行了项目排期。时间还算充裕，给了八天的时间，两天buffer。最后在规定时间内页完成了功能的开发，效果如下:<br><img src="" alt=""><img src="" alt=""><img src="http://img.blog.csdn.net/20160820120017137?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>接下来是提测，但是我要滚回去准备期末考试，也就是说人跑了，bug留下来了。<br>回公司的时候也快要上线，我负责的那部分有两个bug，这两个bug倒不是代码逻辑不对，而是需求。</p>
+<ol>
+<li>在无数据的情况下，显示的图标不对。这个是因为没有和策划确认明确需求，自己想当然了</li>
+<li>遗漏了一个补充需求，这个锅我背一半 因为稿子上是没有明确在对应的页面标注的，而是写在最后面的补充说明里边。当然，这个以后也是特别要注意的<br><strong>2. 代码静态检查</strong><br> 做完第一波需求后正好部门对代码质量提出了更高的要求，我们的提交的代码，每三个小时就会被程序自动检查一次，对于不合格的代码都会按照不同的严重级别进行标出。我的任务便是消灭严重级别较高的代码。所谓不合格代码基本是Clean Code，重构等书上讲的，细致到变量的命名不符合要求，if嵌套超过三层都会标出。工程量较大，着实 花了不少时间。不过这次也算对Clean Code的一个回顾吧。<br><strong>3. 企业版换肤</strong><br> 做企业版1.0的时候视觉给的稿子将主色调从绿色改成了蓝色，由于我们两份代码是要共用，直接简单粗暴的改是不可取的。开始想了两个方案:</li>
+<li>采用Google的主题切换 它要求我们不能使用硬编码，改动会比较大 另外如果我们后续想把它做成动态更换是受限    的:切换主题的时候由于需要重启当前Activity，会产生闪屏，这是不能容忍的。</li>
+<li>遍历所有的View，对View的颜色进行动态改变。 这种方案不会造成闪屏，但是工作量大，侵入性太强。<br>以上两种方案均被否决，第三种方案被提出: 插件化换肤<br>PS:    左边是几个相关的概念: 插件化、组件化、动态加载<br>右边是Android插件化的应用<br><img src="" alt=""> <img src="http://img.blog.csdn.net/20160820120101732?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><img src="" alt=""></li>
+</ol>
+<p>我们把图片/颜色 资源打包成一个插件Apk，然后用定义好的语法规则建立View和资源的对应关系生成一个配置文件。换肤的时候我们只需从插件中获取资源，然后将App中的View根据配置文件进行主题切换。这种方案有两个明显的优点:</p>
+<ol>
+<li>侵入性小，基本不需要对原有的代码进行太多更改，一次部署完成之后，以后想换其他主题只需再打包个插件并对     配置文件进行简单修改即可</li>
+<li>拓展性强，支持动态换肤，如果以后想直接从服务器下发资源进行换肤只需再整合下载模块即可<br>方案敲定后，顺哥给了详细的设计，大概就像下面这样(仅是我修改并简化的粗略类图)<br><img src="" alt=""><img src="http://img.blog.csdn.net/20160820120137427?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></li>
+</ol>
+<p>后续的编码及部署也是花了不少功夫，完工效果如下<br><img src="" alt=""><img src="http://img.blog.csdn.net/20160820120216843?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p><strong>总结 </strong><br>这三个多月的实习，自己在工作方式思考方式变化较大：</p>
+<ol>
+<li>一切以事实说话，你需要拿出明确的理由说服他人</li>
+<li>没有模棱两可，没有想当然，确认后再动手</li>
+<li>设计要落实到纸上，而不是”应该是什么”</li>
+<li>对设计模式有了不一样的见解,浅浅地开始不是为了”模式”而”模式”<br>下面是自己对技术和产品的展望:</li>
+<li>技术<br><img src="" alt=""><img src="http://img.blog.csdn.net/20160820120250552?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></li>
+</ol>
+<p><img src="" alt=""></p>
+<ol>
+<li>产品<br><img src="" alt=""><img src="http://img.blog.csdn.net/20160820120321814?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></li>
+</ol>
+<p><del>~</del><del>~</del><del>~</del><del>~~ 这仅仅是个开始，第一阶段 ~</del><del>~</del><del>~</del><del>~</del>~~~<br><strong>出处:</strong> <a href="http://blog.csdn.net/mummyding/article/details/52260513" target="_blank" rel="external">http://blog.csdn.net/mummyding/article/details/52260513</a><br>GitHub地址: <a href="https://github.com/MummyDing/Leisure/" target="_blank" rel="external">https://github.com/MummyDing/Leisure/</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">MummyDing</a></p>
+        <p><span>发布时间:</span>2016-08-20, 11:56:00</p>
+        <p><span>最后更新:</span>2016-09-05, 15:43:22</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/08/20/网易实习第一阶段简单回顾/" title="网易实习第一阶段简单回顾">https://mummyding.github.io/2016/08/20/网易实习第一阶段简单回顾/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://mummyding.github.io/2016/08/20/网易实习第一阶段简单回顾/　　作者: MummyDing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">
+                    Clean Code （8-完结）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"网易实习第一阶段简单回顾　| MummyDing's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/08/20/网易实习第一阶段简单回顾/" data-title="网易实习第一阶段简单回顾" data-url="https://mummyding.github.io/2016/08/20/网易实习第一阶段简单回顾/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"MummyDing"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/" title="下一篇: Clean Code （8-完结）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 MummyDing
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 2;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

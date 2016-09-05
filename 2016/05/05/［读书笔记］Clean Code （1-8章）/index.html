@@ -15,15 +15,19 @@
 
 
 
-<meta name="description" content="95/Android开发/猪厂打杂">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MummyDing's Blog">
-<meta property="og:url" content="https://mummyding.github.io/archives/index.html">
+<meta name="description" content="时间： 2016/5/5 星期四
+  自写代码以来，逐渐意识代码代码规范的重要性，不过代码该怎么写更多的是自己的一些体会以及在阅读其他人的代码时的感受。后来开始接触项目开发之后，仅仅是代码块的规范还是不够，于是看了一些设计模式的书籍，了解并尝试使用MVC、MVP等架构。这次看Clean  Code这本书还是第一次系统地学习“如何写代码”，作者很详尽地将一些“写代码”规范进行系统整理。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clean Code （1-8章）">
+<meta property="og:url" content="https://mummyding.github.io/2016/05/05/［读书笔记］Clean Code （1-8章）/index.html">
 <meta property="og:site_name" content="MummyDing's Blog">
-<meta property="og:description" content="95/Android开发/猪厂打杂">
+<meta property="og:description" content="时间： 2016/5/5 星期四
+  自写代码以来，逐渐意识代码代码规范的重要性，不过代码该怎么写更多的是自己的一些体会以及在阅读其他人的代码时的感受。后来开始接触项目开发之后，仅仅是代码块的规范还是不够，于是看了一些设计模式的书籍，了解并尝试使用MVC、MVP等架构。这次看Clean  Code这本书还是第一次系统地学习“如何写代码”，作者很详尽地将一些“写代码”规范进行系统整理。">
+<meta property="og:updated_time" content="2016-09-05T07:23:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MummyDing's Blog">
-<meta name="twitter:description" content="95/Android开发/猪厂打杂">
+<meta name="twitter:title" content="Clean Code （1-8章）">
+<meta name="twitter:description" content="时间： 2016/5/5 星期四
+  自写代码以来，逐渐意识代码代码规范的重要性，不过代码该怎么写更多的是自己的一些体会以及在阅读其他人的代码时的感受。后来开始接触项目开发之后，仅仅是代码块的规范还是不够，于是看了一些设计模式的书籍，了解并尝试使用MVC、MVP等架构。这次看Clean  Code这本书还是第一次系统地学习“如何写代码”，作者很详尽地将一些“写代码”规范进行系统整理。">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -55,7 +59,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | MummyDing&#39;s Blog</title>
+<title>Clean Code （1-8章） | MummyDing&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -65,8 +69,8 @@
         fancybox: true,
         animate: true,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -288,407 +292,253 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-［读书笔记］Clean Code （1-8章）" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/08/20/网易实习第一阶段简单回顾/" class="archive-article-date">
-      <time datetime="2016-08-20T03:56:00.000Z" itemprop="datePublished">08-20</time>
+    <div class="article-meta">
+      <a href="/2016/05/05/［读书笔记］Clean Code （1-8章）/" class="article-date">
+      <time datetime="2016-05-05T13:05:00.000Z" itemprop="datePublished">2016-05-05</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Clean Code （1-8章）
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程作者/">【Others】爱编程作者</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习/">实习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/" class="archive-article-date">
-      <time datetime="2016-05-10T11:27:00.000Z" itemprop="datePublished">05-10</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/【Others】读书笔记/">【Others】读书笔记</a>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/05/［读书笔记］Clean Code （1-8章）/" class="archive-article-date">
-      <time datetime="2016-05-05T13:05:00.000Z" itemprop="datePublished">05-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】读书笔记/">【Others】读书笔记</a>
-    </div>
-
-
-          
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/" class="archive-article-date">
-      <time datetime="2016-04-01T11:37:00.000Z" itemprop="datePublished">04-01</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程/">【Others】爱编程</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习生/">实习生</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/" class="archive-article-date">
-      <time datetime="2016-02-09T16:31:00.000Z" itemprop="datePublished">02-10</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/" class="archive-article-date">
-      <time datetime="2016-01-05T12:10:00.000Z" itemprop="datePublished">01-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程/">【Others】爱编程</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2015/">2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2016/">2016</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
+      </div>
       
-        </div></section>
+    
+    <div class="article-entry" itemprop="articleBody">
       
+          
+        <p>时间： 2016/5/5 星期四</p>
+<p>  自写代码以来，逐渐意识代码代码规范的重要性，不过代码该怎么写更多的是自己的一些体会以及在阅读其他人的代码时的感受。后来开始接触项目开发之后，仅仅是代码块的规范还是不够，于是看了一些设计模式的书籍，了解并尝试使用MVC、MVP等架构。这次看Clean  Code这本书还是第一次系统地学习“如何写代码”，作者很详尽地将一些“写代码”规范进行系统整理。<br><a id="more"></a><br>下面我整理的是各章（1-8）一些主要的点</p>
+<p>一、整洁代码</p>
+<ol>
+<li>概念 <pre><code>代码正确   
+简洁明了
+清晰易读  
+短小精确
+</code></pre>二、命名<br>1.准确：<pre><code>名字与意义匹配     
+易于区别      
+</code></pre>2.实用 <pre><code>使用读的出来的名称   
+使用可搜索的名称  
+</code></pre>3.明确    <pre><code>一个概念对应一个词  
+不用双关语   
+使用有意义的语境   
+</code></pre>三、函数<pre><code>1.短小
+2.职责单一
+3.一块代码中，函数的抽象层级需一致
+4.函数命名规范（参照二）
+5.参数尽可能少
+6.如果函数需要的参数要求数量有多种，应考虑将其封装成类
+7.实用异常类代替返回错误码，抽离try/catch代码块，使代码更加简洁
+</code></pre>四、注释<pre><code> 1.少用注释，尽可能通过规范的代码来表达
+ 2.不使用无意义的注释
+ 3.必要的注释
+    法律信息
+   提供信息的注释
+   对代码意图进行解释的注释
+   警示信息，防止踩坑
+   TODO注释：未来得及完成的部分
+4. 对于无用的代码应直接删除而不是注释
+</code></pre>五、格式<pre><code>1.为什么需要规范格式
+     易维护
+     易拓展
+2.垂直格式
+     行数少，短小精悍
+     概念隔离，不同的的概念/逻辑 代码实用空行隔离
+     相关靠近：对于关系紧密的代码，尽量写在一起
+3.水平格式
+     缩进、对齐
+</code></pre>六、对象与数据结构<pre><code>1.区别：
+     过程式代码便于在不改动既有数据结构的前提下添加新函数
+     面向对象代码便于在不改动既有函数的前提下添加新类
+ 亦即：
+         过程式代码难以添加新数据结构，因为必须修改所有函数
+         面向对象代码难以添加新函数，因为必须修改所有类
+</code></pre>七、错误处理<pre><code>1.使用异常而非返回码：
+     更加美观、整洁
+2.使用不可控异常
+     可控异常的代价是违反开放／闭合原则，因为你需要在使用的地方捕获异常
+3.在异常发生的地方添加环境说明：
+     这样当异常发生的时候就可以根据这些信息定位异常原因
+4.不返回null 也不传递null
+     这样在接收的时候不需要进行空值检查
+</code></pre>八、边界<pre><code>翻了下原书，边界是Boundaries   对于这个名字，开始不是大理解，就算现在看来也还是觉得不直观
+</code></pre>   标题略晦涩：作者的意思应该是让我们让自己的代码和第三方库代码不要耦合太紧密，需有清新的边界<pre><code>对于第三方类库给的学习建议是：探索性地学习测试，以此熟悉类库，写出良好的代码
+</code></pre></li>
+</ol>
+<p>第九章时讲单元测试，这个之前在实际开发中还没使用过，只是在一些书上看到过，明天尝试下再继续看</p>
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" class="archive-article-date">
-      <time datetime="2015-12-11T11:22:00.000Z" itemprop="datePublished">12-11</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a><a class="article-category-link" href="/categories/【Android】APP/【Android】分享/">【Android】分享</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源/">开源</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" class="archive-article-date">
-      <time datetime="2015-11-05T13:04:00.000Z" itemprop="datePublished">11-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a><a class="article-category-link" href="/categories/【Android】UI/【Android】分享/">【Android】分享</a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">MummyDing</a></p>
+        <p><span>发布时间:</span>2016-05-05, 21:05:00</p>
+        <p><span>最后更新:</span>2016-09-05, 15:23:44</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/" title="Clean Code （1-8章）">https://mummyding.github.io/2016/05/05/［读书笔记］Clean Code （1-8章）/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://mummyding.github.io/2016/05/05/［读书笔记］Clean Code （1-8章）/　　作者: MummyDing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片选择器/">图片选择器</a></li></ul>
-    </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/10/20/【Android】Android Studio 使用第三方类库/" class="archive-article-date">
-      <time datetime="2015-10-20T08:21:00.000Z" itemprop="datePublished">10-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】分享/">【Android】分享</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类库/">类库</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/" class="archive-article-date">
-      <time datetime="2015-09-18T10:21:00.000Z" itemprop="datePublished">09-18</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/课程表/">课程表</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">
+                    Clean Code （8-完结）
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">
+                    Android实习生面试记录－蘑菇街、网易等
+                </a>
+            </div>
+        
     </nav>
-  
 
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Clean Code （1-8章）　| MummyDing's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/05/05/［读书笔记］Clean Code （1-8章）/" data-title="Clean Code （1-8章）" data-url="https://mummyding.github.io/2016/05/05/［读书笔记］Clean Code （1-8章）/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"MummyDing"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/" title="上一篇: Clean Code （8-完结）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/" title="下一篇: Android实习生面试记录－蘑菇街、网易等">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">

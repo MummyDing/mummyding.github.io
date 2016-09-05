@@ -14,11 +14,14 @@
 <meta name="author" content="MummyDing" />
 
 
+    
+    
+
 
 <meta name="description" content="95/Android开发/猪厂打杂">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MummyDing's Blog">
-<meta property="og:url" content="https://mummyding.github.io/archives/index.html">
+<meta property="og:url" content="https://mummyding.github.io/page/2/index.html">
 <meta property="og:site_name" content="MummyDing's Blog">
 <meta property="og:description" content="95/Android开发/猪厂打杂">
 <meta name="twitter:card" content="summary">
@@ -51,11 +54,13 @@
 <link rel="stylesheet" href="/css/style.css">
 
 
+    <style> .article { opacity: 0;} </style>
+
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | MummyDing&#39;s Blog</title>
+<title>MummyDing&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -64,9 +69,9 @@
     var yiliaConfig = {
         fancybox: true,
         animate: true,
-        isHome: false,
+        isHome: true,
         isPost: false,
-        isArchive: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -290,405 +295,487 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-【Android】基于融云SDK的即时聊天工具" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/" class="article-date">
+      <time datetime="2015-09-10T10:29:00.000Z" itemprop="datePublished">2015-09-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>一直想做一个类似QQ的聊天APP，先是仿了QQ的UI(详见<a href="http://blog.csdn.net/mummyding/article/details/47708203">【Android】高仿QQ<br> 5.0+ UI</a>),现在借助第三方服务实现了聊天功能。在知乎上看到有人也在问如何实现一个IM，如果完全自己做，还得去了解一些通信协议，于是偷懒使用了第三方的服务。虽说底层的通信不需要自己管，但其他的编码量也并不小，前后花了一个多礼拜。(当然也是自己学艺不精)<br>关于融云，我引用我在知乎上的一段回答:
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/08/20/网易实习第一阶段简单回顾/" class="archive-article-date">
-      <time datetime="2016-08-20T03:56:00.000Z" itemprop="datePublished">08-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程作者/">【Others】爱编程作者</a>
+    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a>
     </div>
 
 
-          
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习/">实习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IM/">IM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material-Design/">Material Design</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/10/［读书笔记］Clean Code （8-完结）/" class="archive-article-date">
-      <time datetime="2016-05-10T11:27:00.000Z" itemprop="datePublished">05-10</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【Android】高仿QQ 5.0+ UI" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/16/【Android】高仿QQ 5.0+ UI/" class="article-date">
+      <time datetime="2015-08-16T15:27:00.000Z" itemprop="datePublished">2015-08-16</time>
 </a>
 
 
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a>
+      <a class="article-title" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
           
+              <p>每天接触的QQ客户端简洁美观,特别是那个侧滑菜单更是吸引人,然后就想着自己做一个.前前后后折腾下来,总算有个样子了.
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】读书笔记/">【Others】读书笔记</a>
+    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a><a class="article-category-link" href="/categories/【Android】APP/【Android】UI/">【Android】UI</a>
     </div>
 
 
-          
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QQ/">QQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QQ-UI/">QQ UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/侧滑菜单/">侧滑菜单</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a href="/2015/08/16/【Android】高仿QQ 5.0+ UI/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/05/05/［读书笔记］Clean Code （1-8章）/" class="archive-article-date">
-      <time datetime="2016-05-05T13:05:00.000Z" itemprop="datePublished">05-05</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【Android】自定义圆形ImageView(圆形头像 可指定大小)" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/" class="article-date">
+      <time datetime="2015-08-16T13:45:00.000Z" itemprop="datePublished">2015-08-16</time>
 </a>
 
 
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a>
+      <a class="article-title" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】读书笔记/">【Others】读书笔记</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记/">读书笔记</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </header>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/" class="archive-article-date">
-      <time datetime="2016-04-01T11:37:00.000Z" itemprop="datePublished">04-01</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程/">【Others】爱编程</a>
+              <p> 最近在仿手Q的UI,这里面经常要用到的就是圆形头像,看到 <a href="http://blog.csdn.net/mummyding/article/details/47347331">在android中画圆形图片的几种办法</a> 这篇文章,了解了制作这种头像的原理.不过里面提供的方法还有一个不足的地方就是不能根据实际需求改变图片的大小,也就是说提供的原图是大尺寸的,转换之后的图片也是大尺寸的,这显然不符合我们实际项目中的需求.于是我对里面介绍的第一种方法做了一番改进,使其能直接在XML中指定图片的大小.
+          
+      
     </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/实习生/">实习生</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/">推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网易/">网易</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面试/">面试</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/" class="archive-article-date">
-      <time datetime="2016-02-09T16:31:00.000Z" itemprop="datePublished">02-10</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
+    <div class="article-info article-info-index">
+      
+      
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/">View</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/" class="archive-article-date">
-      <time datetime="2016-01-05T12:10:00.000Z" itemprop="datePublished">01-05</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Others】爱编程/">【Others】爱编程</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2015/">2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2016/">2016</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ImageView/">ImageView</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/圆形头像/">圆形头像</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【Android】Android聊天机器人实现" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/23/【Android】Android聊天机器人实现/" class="article-date">
+      <time datetime="2015-07-23T03:08:00.000Z" itemprop="datePublished">2015-07-23</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>昨天看到一个Android视频教程讲图灵机器人，那个API接口用起来还是挺方便的，就准备自己动手做一个了。另外自己还使用了高德地图的API接口用于定位(以前用过高德的接口，比X度方便)<br>大体流程:<br>1.构建UI<br>2.请求数据[机器人&amp;地图]<br>3.解析数据[接口返回的是JSON数据]<br>4.解析出来的数据组装成HTML代码[这样直接扔在TextView上显示图片链接什么的都很方便]<br>5.更新UI<br>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2015" class="archive-year">2015</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/" class="archive-article-date">
-      <time datetime="2015-12-11T11:22:00.000Z" itemprop="datePublished">12-11</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a><a class="article-category-link" href="/categories/【Android】APP/【Android】分享/">【Android】分享</a>
+    <a class="article-category-link" href="/categories/【Android】APP/">【Android】APP</a><a class="article-category-link" href="/categories/【Android】APP/【Android】UI/">【Android】UI</a>
     </div>
 
 
-          
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源/">开源</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSON/">JSON</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ListView/">ListView</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a href="/2015/07/23/【Android】Android聊天机器人实现/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/" class="archive-article-date">
-      <time datetime="2015-11-05T13:04:00.000Z" itemprop="datePublished">11-05</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【Android】使用 SwipeRefreshLayout 实现下拉刷新" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/" class="article-date">
+      <time datetime="2015-07-20T07:04:00.000Z" itemprop="datePublished">2015-07-20</time>
 </a>
 
 
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a>
+      <a class="article-title" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a><a class="article-category-link" href="/categories/【Android】UI/【Android】分享/">【Android】分享</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOM/">OOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图片选择器/">图片选择器</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+      </header>
+      
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/10/20/【Android】Android Studio 使用第三方类库/" class="archive-article-date">
-      <time datetime="2015-10-20T08:21:00.000Z" itemprop="datePublished">10-20</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
+    <div class="article-entry" itemprop="articleBody">
+      
           
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/【Android】分享/">【Android】分享</a>
+              <p>今天在codepath 上看到一个开源项目 <a href="http://guides.codepath.com/android/Implementing-Pull-to-Refresh-Guide#references">[点击查看]</a>使用到了 SwipeRefreshLayout 实现了下拉刷新,但示例并不完整,于是自己就动手写了下.之前看到郭霖的博客上也有介绍下拉刷新,不过他是纯手动实现的,代码量大,较为繁琐.[<a href="http://blog.csdn.net/guolin_blog/article/details/9255575">点击查看</a>]而使用Android<br> 提供的SwipeRefreshLayout 则大大减少了我们的工作量,当然,学会了使用SwipeRefreshLayout之后还是建议去看看怎样不借助SwipeRefreshLayout从零开始实现”下拉刷新”.
+          
+      
     </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类库/">类库</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/" class="archive-article-date">
-      <time datetime="2015-09-18T10:21:00.000Z" itemprop="datePublished">09-18</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
+    <div class="article-info article-info-index">
+      
+      
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
     </div>
 
 
-          
+      
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/课程表/">课程表</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
     </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
+  
 </article>
+
+
+
+
+
+
+
+
+
   
+    <article id="post-【Android】九宫格手势锁简单实现" class="article article-type-post" itemscope itemprop="blogPost">
   
-    </div></section>
+    <div class="article-meta">
+      <a href="/2015/07/18/【Android】九宫格手势锁简单实现/" class="article-date">
+      <time datetime="2015-07-18T02:55:00.000Z" itemprop="datePublished">2015-07-18</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a>
+    </h1>
   
 
+      </header>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>现在好多应用都可以设置手势锁，Android本身也有提供手势图案锁屏。作为Android菜鸟的我，也忍不住想自己动手实现一下。<br>下面是应用效果图:
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/九宫格手势/">九宫格手势</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自定义View/">自定义View</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2015/07/18/【Android】九宫格手势锁简单实现/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【Android】桌面歌词悬浮效果简单实现" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/" class="article-date">
+      <time datetime="2015-07-16T01:58:00.000Z" itemprop="datePublished">2015-07-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>在使用”网易云音乐”的时候，<br>发现有一个显示”桌面歌词”的功能，于是就想着自己实现下。查了下资料，是用WindowManage实现的。实现过程中也出现了些问题，看了官方文档，也算解决了。这里贴上简单代码。
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/【Android】UI/">【Android】UI</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WindowManage/">WindowManage</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/桌面歌词/">桌面歌词</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
   
-
 </div>
       <footer id="footer">
     <div class="outer">
