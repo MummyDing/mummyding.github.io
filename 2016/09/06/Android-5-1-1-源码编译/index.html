@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="MummyDing" />
+
+
+
+<meta name="description" content="一年前刚学Android没多久的时候就开始尝试编译Android源码，前后换过好几个版本均以失败告终。失败的原因主要有以下几个:
+
+网络不稳定:导致源码下载不全
+编译环境不对:依赖软件没装全，软件版本不对源码动辄一二十G，下载编译时间成本都非常高，差一点没处理好可能就得从头再来，所以编译源码最好能有较长的完整时间.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 5.1.1 源码编译">
+<meta property="og:url" content="https://mummyding.github.io/2016/09/06/Android-5-1-1-源码编译/index.html">
+<meta property="og:site_name" content="MummyDing's Blog">
+<meta property="og:description" content="一年前刚学Android没多久的时候就开始尝试编译Android源码，前后换过好几个版本均以失败告终。失败的原因主要有以下几个:
+
+网络不稳定:导致源码下载不全
+编译环境不对:依赖软件没装全，软件版本不对源码动辄一二十G，下载编译时间成本都非常高，差一点没处理好可能就得从头再来，所以编译源码最好能有较长的完整时间.">
+<meta property="og:image" content="https://mummyding.github.io/img/2016-09-06_1.png">
+<meta property="og:image" content="https://mummyding.github.io/img/2016-09-06_2.png">
+<meta property="og:updated_time" content="2016-09-06T10:26:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 5.1.1 源码编译">
+<meta name="twitter:description" content="一年前刚学Android没多久的时候就开始尝试编译Android源码，前后换过好几个版本均以失败告终。失败的原因主要有以下几个:
+
+网络不稳定:导致源码下载不全
+编译环境不对:依赖软件没装全，软件版本不对源码动辄一二十G，下载编译时间成本都非常高，差一点没处理好可能就得从头再来，所以编译源码最好能有较长的完整时间.">
+<meta name="twitter:image" content="https://mummyding.github.io/img/2016-09-06_1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="MummyDing&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/avatar.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Android 5.1.1 源码编译 | MummyDing&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56ff76c972fc0cf9"></script>
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?be11afd3596504a0dc0ea401f7154654";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">MummyDing</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android Developer</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>Menu</li>
+                        <li>Tags</li>
+                        
+                        <li>Friends</li>
+                        
+                        
+                        <li>About Me</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签</a></li>
+                        
+                            <li><a href="/tags/推荐/">推荐</a></li>
+                        
+                            <li><a href="/tags/随笔/">随笔</a></li>
+                        
+                            <li><a href="/tags/MummyDing">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/"> 推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2016/">2016</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-App/">Android App</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-UI/">Android UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clean-Code/">Clean Code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/">Dialog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IM/">IM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/">ImageView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ListView/">ListView</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Material-Design/">Material Design</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MummyDing/">MummyDing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOM/">OOM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ/">QQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QQ-UI/">QQ UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SwipeRefreshLayout/">SwipeRefreshLayout</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WindowManage/">WindowManage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/九宫格手势/">九宫格手势</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码规范/">代码规范</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/侧滑菜单/">侧滑菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图片选择器/">图片选择器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/圆形头像/">圆形头像</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习生/">实习生</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/年终总结/">年终总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源/">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/推荐/">推荐</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/桌面歌词/">桌面歌词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码编译/">源码编译</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类库/">类库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易/">网易</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义View/">自定义View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/蘑菇街/">蘑菇街</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记/">读书笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/课程表/">课程表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://kevinwu.cn/">KevinWu.CN</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ddragonever.com/">Ddragon&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.kdwycz.com/">kdwycz&#39;s blog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://mkfmiku.github.io/">KFBlog</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://blog.lattez.club/">Latte_z</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">95/Android开发/猪厂打杂</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">MummyDing</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">MummyDing</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android Developer</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签</a></li>
+                
+                    <li><a href="/tags/推荐/">推荐</a></li>
+                
+                    <li><a href="/tags/随笔/">随笔</a></li>
+                
+                    <li><a href="/tags/MummyDing">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:MummyDing@outlook.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/MummyDing" title="GitHub"></a>
+                            
+                                <a class="fa 知乎" target="_blank" href="http://www.zhihu.com/people/MummyDing" title="知乎"></a>
+                            
+                                <a class="fa CSDN" target="_blank" href="http://blog.csdn.net/MummyDing" title="CSDN"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="Tags" friends="Friends" about="About Me"/>
+</nav>
+      <div class="body-wrap"><article id="post-Android-5-1-1-源码编译" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/06/Android-5-1-1-源码编译/" class="article-date">
+      <time datetime="2016-09-06T07:32:00.000Z" itemprop="datePublished">2016-09-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android 5.1.1 源码编译
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码编译/">源码编译</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>一年前刚学Android没多久的时候就开始尝试编译Android源码，前后换过好几个版本均以失败告终。失败的原因主要有以下几个:</p>
+<ul>
+<li>网络不稳定:导致源码下载不全</li>
+<li>编译环境不对:依赖软件没装全，软件版本不对<br>源码动辄一二十G，下载编译时间成本都非常高，差一点没处理好可能就得从头再来，所以编译源码最好能有较长的完整时间.   <a id="more"></a>
+</li>
+</ul>
+<p></p><h3> 环境配置   <p></p>
+<ol>
+<li>安装 Ubuntu 14.04 LTS  </li>
+<li><p>配置source list，我用的是清华的源  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">$ sudo gedit /etc/apt/sources.list</div><div class="line">替换成</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse</div><div class="line">deb http://archive.canonical.com/ubuntu/ trusty partner</div><div class="line"></div><div class="line">deb http://extras.ubuntu.com/ubuntu/ trusty main</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-security main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-updates main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-backports main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-proposed main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-security main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-updates main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-proposed main restricted universe multiverse</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 &amp; 配置 OpenJDK 7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update   </div><div class="line">$ sudo apt-get install openjdk-7-jdk   </div><div class="line">$ sudo gedit /etc/profile  </div><div class="line">文件末尾加上:   </div><div class="line">JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/     </div><div class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin     </div><div class="line">export JAVA_HOME     </div><div class="line">export PATH</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 &amp; 配置 git <br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt install git</div><div class="line">$ git config --global user.name &quot;你的git用户名&quot;</div><div class="line">$ git config --global user.email &quot;你的git邮箱&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装必要的packages</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install g++-multilib</div><div class="line">$ sudo apt-get install  bison git gperf libxml2-utils make python-networkx zlib1g-dev:i386 zip</div><div class="line">$ sudo apt-get install gcc</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装repo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> 如果你是自由网络:</div><div class="line"> $ mkdir ~/bin</div><div class="line"> $ sudo apt-get install curl</div><div class="line"> $ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</div><div class="line">$ chmod a+x ~/bin/repo</div><div class="line"> 否则安装phablet-tools,它包含 repo:</div><div class="line"> $ sudo apt-get install phablet-tools</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改REPO_URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">源码我不是直接连官网下的，而是使用了中科大的源，速度很快</div><div class="line">这里我们需要对repo的REPO_URL进行修改</div><div class="line">如果你是使用上面第一种方法安装的repo，那repo的路径是~/bin/repo</div><div class="line">$ sudo gedit ~/bin/repo</div><div class="line">否则路径为/usr/bin/repo</div><div class="line">$ sudo gedit /usr/bin/repo</div><div class="line">修改repo文件，设置REPO_URL如下：</div><div class="line">REPO_URL = &apos;https://gerrit-googlesource.lug.ustc.edu.cn/git-repo&apos;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p></p><h3> 下载源码<p></p>
+<ol>
+<li><p>初始化<br>选一个足够大的分区(最好不小于50G)建一个目录专门存放下载的源码,在该目录下输入一下命令初始化:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ repo init -u https://gerrit-googlesource.lug.ustc.edu.cn/git-repo&apos; -b android-5.1.1_r8</div></pre></td></tr></table></figure>
+</li>
+<li><p>开始下载   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sync repo</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>漫长的等待, 我下载的时候速度在 500KB/s ~ 1.6MB/s 不等，用了大概五个小时</p>
+<p></p><h3> 编译源码 <p></p>
+<ol>
+<li><p>初始化编译环境<br>如果你的系统是存放源码的分区是ntfs格式的就需要特别注意了，Linux是不允许ntfs文件系统下文件拥有执行权限的。之前就被这个坑过，以为无解，就把源码转移到非ntfs的分区. 还好这次我找到了解决方法,安装一个软件即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install ntfs-3g</div><div class="line">$ sudo apt-get install ntfs-config</div><div class="line">打开 ntfs-config:</div><div class="line">$ sudo ntfs-config</div><div class="line">赋予相应分区权限</div></pre></td></tr></table></figure>
+<p>确保有执行权限后，执行envsetup.sh初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ . build/envsetup.sh</div></pre></td></tr></table></figure>
+<p>选择编译目标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ lunch</div><div class="line">执行此命令后会列出所有可供编译的目标，我是打算仍模拟器上跑的，选1就好</div></pre></td></tr></table></figure>
+</li>
+<li><p>开始编译   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ make j4</div><div class="line">这里的4表示并发数，可以自己改</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>编译时间就取决于你的硬件了 少则一两个小时，长则八九个小时都有可能，我的跑了五个多小时,成功提示:<br><img src="https://mummyding.github.io/img/2016-09-06_1.png" alt="img"></p>
+<ol>
+<li>运行<br>如果上面一切顺利就可以在模拟器上跑编译出来的镜像了,在源码目录执行以下命令:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ emulator &amp;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>效果如下:  </p>
+<p><img src="https://mummyding.github.io/img/2016-09-06_2.png" alt="img"></p>
+</h3></h3></h3>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>Title:</span><a href="/2016/09/06/Android-5-1-1-源码编译/">Android 5.1.1 源码编译</a></p>
+        <p><span>Author:</span><a href="/" title="Back to Homepage">MummyDing</a></p>
+        <p><span>Created:</span>2016-09-06, 15:32:00</p>
+        <p><span>Updated:</span>2016-09-06, 18:26:58</p>
+        <p>
+            <span>Full URL:</span><a class="post-url" href="/2016/09/06/Android-5-1-1-源码编译/" title="Android 5.1.1 源码编译">https://mummyding.github.io/2016/09/06/Android-5-1-1-源码编译/</a>
+            <span class="copy-path" data-clipboard-text="From https://mummyding.github.io/2016/09/06/Android-5-1-1-源码编译/　　By MummyDing" title="Copy Article&#39;s Link &amp; Author"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>License:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"CC BY-NC-SA 4.0"</a> Keep Link &amp; Author if Distribute.
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/08/20/网易实习第一阶段简单回顾/">
+                    网易实习第一阶段简单回顾
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text"> 环境配置   
+
+安装 Ubuntu 14.04 LTS  
+配置source list，我用的是清华的源  
+12345678910111213141516171819202122232425$ sudo gedit /etc/apt/sources.list替换成deb http://archive.ubuntu.com/ubuntu/ trusty main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ trusty-security main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiversedeb http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ trusty main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ trusty-security main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiversedeb-src http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiversedeb http://archive.canonical.com/ubuntu/ trusty partnerdeb http://extras.ubuntu.com/ubuntu/ trusty maindeb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise main restricted universe multiversedeb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-security main restricted universe multiversedeb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-updates main restricted universe multiversedeb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-backports main restricted universe multiversedeb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-proposed main restricted universe multiversedeb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise main restricted universe multiversedeb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-security main restricted universe multiversedeb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-updates main restricted universe multiversedeb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-backports main restricted universe multiversedeb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-proposed main restricted universe multiverse
+
+安装 & 配置 OpenJDK 7
+12345678$ sudo apt-get update   $ sudo apt-get install openjdk-7-jdk   $ sudo gedit /etc/profile  文件末尾加上:   JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/     PATH=$PATH:$HOME/bin:$JAVA_HOME/bin     export JAVA_HOME     export PATH
+
+安装 & 配置 git 
+123$ sudo apt install git$ git config --global user.name "你的git用户名"$ git config --global user.email "你的git邮箱"
+
+安装必要的packages
+123$ sudo apt-get install g++-multilib$ sudo apt-get install  bison git gperf libxml2-utils make python-networkx zlib1g-dev:i386 zip$ sudo apt-get install gcc
+
+安装repo
+1234567 如果你是自由网络: $ mkdir ~/bin $ sudo apt-get install curl $ curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo$ chmod a+x ~/bin/repo 否则安装phablet-tools,它包含 repo: $ sudo apt-get install phablet-tools
+
+修改REPO_URL
+12345678源码我不是直接连官网下的，而是使用了中科大的源，速度很快这里我们需要对repo的REPO_URL进行修改如果你是使用上面第一种方法安装的repo，那repo的路径是~/bin/repo$ sudo gedit ~/bin/repo否则路径为/usr/bin/repo$ sudo gedit /usr/bin/repo修改repo文件，设置REPO_URL如下：REPO_URL = 'https://gerrit-googlesource.lug.ustc.edu.cn/git-repo'
+
+
+ 下载源码
+
+初始化选一个足够大的分区(最好不小于50G)建一个目录专门存放下载的源码,在该目录下输入一下命令初始化:
+1$ repo init -u https://gerrit-googlesource.lug.ustc.edu.cn/git-repo' -b android-5.1.1_r8
+
+开始下载   
+1$ sync repo
+
+
+漫长的等待, 我下载的时候速度在 500KB/s ~ 1.6MB/s 不等，用了大概五个小时
+ 编译源码 
+
+初始化编译环境如果你的系统是存放源码的分区是ntfs格式的就需要特别注意了，Linux是不允许ntfs文件系统下文件拥有执行权限的。之前就被这个坑过，以为无解，就把源码转移到非ntfs的分区. 还好这次我找到了解决方法,安装一个软件即可:
+12345$ sudo apt-get install ntfs-3g$ sudo apt-get install ntfs-config打开 ntfs-config:$ sudo ntfs-config赋予相应分区权限
+确保有执行权限后，执行envsetup.sh初始化
+1$ . build/envsetup.sh
+选择编译目标
+12$ lunch执行此命令后会列出所有可供编译的目标，我是打算仍模拟器上跑的，选1就好
+
+开始编译   
+12$ make j4这里的4表示并发数，可以自己改
+
+
+编译时间就取决于你的硬件了 少则一两个小时，长则八九个小时都有可能，我的跑了五个多小时,成功提示:
+
+运行如果上面一切顺利就可以在模拟器上跑编译出来的镜像了,在源码目录执行以下命令:1$ emulator &
+
+
+效果如下:  
+
+</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text"> 下载源码
+
+初始化选一个足够大的分区(最好不小于50G)建一个目录专门存放下载的源码,在该目录下输入一下命令初始化:
+1$ repo init -u https://gerrit-googlesource.lug.ustc.edu.cn/git-repo' -b android-5.1.1_r8
+
+开始下载   
+1$ sync repo
+
+
+漫长的等待, 我下载的时候速度在 500KB/s ~ 1.6MB/s 不等，用了大概五个小时
+ 编译源码 
+
+初始化编译环境如果你的系统是存放源码的分区是ntfs格式的就需要特别注意了，Linux是不允许ntfs文件系统下文件拥有执行权限的。之前就被这个坑过，以为无解，就把源码转移到非ntfs的分区. 还好这次我找到了解决方法,安装一个软件即可:
+12345$ sudo apt-get install ntfs-3g$ sudo apt-get install ntfs-config打开 ntfs-config:$ sudo ntfs-config赋予相应分区权限
+确保有执行权限后，执行envsetup.sh初始化
+1$ . build/envsetup.sh
+选择编译目标
+12$ lunch执行此命令后会列出所有可供编译的目标，我是打算仍模拟器上跑的，选1就好
+
+开始编译   
+12$ make j4这里的4表示并发数，可以自己改
+
+
+编译时间就取决于你的硬件了 少则一两个小时，长则八九个小时都有可能，我的跑了五个多小时,成功提示:
+
+运行如果上面一切顺利就可以在模拟器上跑编译出来的镜像了,在源码目录执行以下命令:1$ emulator &
+
+
+效果如下:  
+
+</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text"> 编译源码 
+
+初始化编译环境如果你的系统是存放源码的分区是ntfs格式的就需要特别注意了，Linux是不允许ntfs文件系统下文件拥有执行权限的。之前就被这个坑过，以为无解，就把源码转移到非ntfs的分区. 还好这次我找到了解决方法,安装一个软件即可:
+12345$ sudo apt-get install ntfs-3g$ sudo apt-get install ntfs-config打开 ntfs-config:$ sudo ntfs-config赋予相应分区权限
+确保有执行权限后，执行envsetup.sh初始化
+1$ . build/envsetup.sh
+选择编译目标
+12$ lunch执行此命令后会列出所有可供编译的目标，我是打算仍模拟器上跑的，选1就好
+
+开始编译   
+12$ make j4这里的4表示并发数，可以自己改
+
+
+编译时间就取决于你的硬件了 少则一两个小时，长则八九个小时都有可能，我的跑了五个多小时,成功提示:
+
+运行如果上面一切顺利就可以在模拟器上跑编译出来的镜像了,在源码目录执行以下命令:1$ emulator &
+
+
+效果如下:  
+
+</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="Hide"  title="Show or Hide Table of Contents">
+
+    <script>
+        yiliaConfig.toc = ["Hide", "Show", !!"false"];
+    </script>
+
+
+
+    <div class="share">
+
+
+<div class="addthis_sharing_toolbox"></div>
+
+</div>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="2016/09/06/Android-5-1-1-源码编译/" data-title="Android 5.1.1 源码编译" data-url="https://mummyding.github.io/2016/09/06/Android-5-1-1-源码编译/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"MummyDing"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="Back to Homepage"><i class="fa fa-home"></i></a>
+        
+
+        <a title="Mini Archives"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/08/20/网易实习第一阶段简单回顾/" title="Next: 网易实习第一阶段简单回顾">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/06/Android-5-1-1-源码编译/">Android 5.1.1 源码编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/08/20/网易实习第一阶段简单回顾/">网易实习第一阶段简单回顾</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/［读书笔记］Clean Code （8-完结）/">Clean Code （8-完结）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/［读书笔记］Clean Code （1-8章）/">Clean Code （1-8章）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/ Android实习生面试记录－蘑菇街、网易等/">Android实习生面试记录－蘑菇街、网易等</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/10/【Android】ColorPickerDialog 自定义颜色选择器的实现/">ColorPickerDialog 自定义颜色选择器的实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/05/ [爱编程]迟到的2015年终总结--初入工程开发/">迟到的2015年终总结--初入工程开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/11/【Android】开源　闲暇(Leisure) 阅读类应用的开发/">闲暇(Leisure) 阅读类应用的开发</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/05/【Android】多图选择器(支持图片预览 高效加载不怕OOM)/">多图选择器(支持图片预览 高效加载不怕OOM)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/20/【Android】Android Studio 使用第三方类库/">Android Studio 使用第三方类库</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/18/【Android】课程表布局实现(支持动态添加课程)/">课程表布局实现(支持动态添加课程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/10/【Android】基于融云SDK的即时聊天工具/">基于融云SDK的即时聊天工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】高仿QQ 5.0+ UI/">高仿QQ 5.0+ UI</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/08/16/【Android】自定义圆形ImageView(圆形头像 可指定大小)/">自定义圆形ImageView(圆形头像 可指定大小)</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/23/【Android】Android聊天机器人实现/">Android聊天机器人实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/20/【Android】使用 SwipeRefreshLayout 实现下拉刷新/">使用 SwipeRefreshLayout 实现下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/18/【Android】九宫格手势锁简单实现/">九宫格手势锁简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/16/【Android】桌面歌词悬浮效果简单实现/">桌面歌词悬浮效果简单实现</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 MummyDing
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="A fast, simple &amp; powerful blog framework">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="Another simple and elegant theme for Hexo  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="Site Visitors"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="Page Hits"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 2;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="Back to Top"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="Comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="Go to Bottom"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

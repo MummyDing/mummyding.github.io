@@ -4,6 +4,70 @@
   
     
     <entry>
+      <title><![CDATA[Android 5.1.1 源码编译]]></title>
+      <url>https://mummyding.github.io/2016/09/06/Android-5-1-1-%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</url>
+      <content type="html"><![CDATA[<p>一年前刚学Android没多久的时候就开始尝试编译Android源码，前后换过好几个版本均以失败告终。失败的原因主要有以下几个:</p>
+<ul>
+<li>网络不稳定:导致源码下载不全</li>
+<li>编译环境不对:依赖软件没装全，软件版本不对<br>源码动辄一二十G，下载编译时间成本都非常高，差一点没处理好可能就得从头再来，所以编译源码最好能有较长的完整时间.   <a id="more"></a>
+</li>
+</ul>
+<p></p><h3> 环境配置   <p></p>
+<ol>
+<li>安装 Ubuntu 14.04 LTS  </li>
+<li><p>配置source list，我用的是清华的源  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">$ sudo gedit /etc/apt/sources.list</div><div class="line">替换成</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-security main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiverse</div><div class="line">deb-src http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse</div><div class="line">deb http://archive.canonical.com/ubuntu/ trusty partner</div><div class="line"></div><div class="line">deb http://extras.ubuntu.com/ubuntu/ trusty main</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-security main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-updates main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-backports main restricted universe multiverse</div><div class="line">deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-proposed main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-security main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-updates main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ precise-proposed main restricted universe multiverse</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 &amp; 配置 OpenJDK 7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update   </div><div class="line">$ sudo apt-get install openjdk-7-jdk   </div><div class="line">$ sudo gedit /etc/profile  </div><div class="line">文件末尾加上:   </div><div class="line">JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/     </div><div class="line">PATH=$PATH:$HOME/bin:$JAVA_HOME/bin     </div><div class="line">export JAVA_HOME     </div><div class="line">export PATH</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装 &amp; 配置 git <br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt install git</div><div class="line">$ git config --global user.name &quot;你的git用户名&quot;</div><div class="line">$ git config --global user.email &quot;你的git邮箱&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装必要的packages</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install g++-multilib</div><div class="line">$ sudo apt-get install  bison git gperf libxml2-utils make python-networkx zlib1g-dev:i386 zip</div><div class="line">$ sudo apt-get install gcc</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装repo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> 如果你是自由网络:</div><div class="line"> $ mkdir ~/bin</div><div class="line"> $ sudo apt-get install curl</div><div class="line"> $ curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</div><div class="line">$ chmod a+x ~/bin/repo</div><div class="line"> 否则安装phablet-tools,它包含 repo:</div><div class="line"> $ sudo apt-get install phablet-tools</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改REPO_URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">源码我不是直接连官网下的，而是使用了中科大的源，速度很快</div><div class="line">这里我们需要对repo的REPO_URL进行修改</div><div class="line">如果你是使用上面第一种方法安装的repo，那repo的路径是~/bin/repo</div><div class="line">$ sudo gedit ~/bin/repo</div><div class="line">否则路径为/usr/bin/repo</div><div class="line">$ sudo gedit /usr/bin/repo</div><div class="line">修改repo文件，设置REPO_URL如下：</div><div class="line">REPO_URL = &apos;https://gerrit-googlesource.lug.ustc.edu.cn/git-repo&apos;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p></p><h3> 下载源码<p></p>
+<ol>
+<li><p>初始化<br>选一个足够大的分区(最好不小于50G)建一个目录专门存放下载的源码,在该目录下输入一下命令初始化:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ repo init -u https://gerrit-googlesource.lug.ustc.edu.cn/git-repo&apos; -b android-5.1.1_r8</div></pre></td></tr></table></figure>
+</li>
+<li><p>开始下载   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sync repo</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>漫长的等待, 我下载的时候速度在 500KB/s ~ 1.6MB/s 不等，用了大概五个小时</p>
+<p></p><h3> 编译源码 <p></p>
+<ol>
+<li><p>初始化编译环境<br>如果你的系统是存放源码的分区是ntfs格式的就需要特别注意了，Linux是不允许ntfs文件系统下文件拥有执行权限的。之前就被这个坑过，以为无解，就把源码转移到非ntfs的分区. 还好这次我找到了解决方法,安装一个软件即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install ntfs-3g</div><div class="line">$ sudo apt-get install ntfs-config</div><div class="line">打开 ntfs-config:</div><div class="line">$ sudo ntfs-config</div><div class="line">赋予相应分区权限</div></pre></td></tr></table></figure>
+<p>确保有执行权限后，执行envsetup.sh初始化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ . build/envsetup.sh</div></pre></td></tr></table></figure>
+<p>选择编译目标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ lunch</div><div class="line">执行此命令后会列出所有可供编译的目标，我是打算仍模拟器上跑的，选1就好</div></pre></td></tr></table></figure>
+</li>
+<li><p>开始编译   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ make j4</div><div class="line">这里的4表示并发数，可以自己改</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>编译时间就取决于你的硬件了 少则一两个小时，长则八九个小时都有可能，我的跑了五个多小时,成功提示:<br><img src="https://mummyding.github.io/img/2016-09-06_1.png" alt="img"></p>
+<ol>
+<li>运行<br>如果上面一切顺利就可以在模拟器上跑编译出来的镜像了,在源码目录执行以下命令:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ emulator &amp;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>效果如下:  </p>
+<p><img src="https://mummyding.github.io/img/2016-09-06_2.png" alt="img"></p>
+</h3></h3></h3>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[网易实习第一阶段简单回顾]]></title>
       <url>https://mummyding.github.io/2016/08/20/%E7%BD%91%E6%98%93%E5%AE%9E%E4%B9%A0%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%E7%AE%80%E5%8D%95%E5%9B%9E%E9%A1%BE/</url>
       <content type="html"><![CDATA[<p>前几天顺哥面试的时候碰到HR明确说我转正答辩通过，趁此机会对这段时间的工作做个梳理。面试经历之前在已经在 <strong><a href="http://blog.csdn.net/mummyding/article/details/51037084" target="_blank" rel="external"></a><a href="http://blog.csdn.net/mummyding/article/details/51037084" target="_blank" rel="external">Android实习生面试记录－蘑菇街、网易等</a> </strong>写了，结果就是网易发了offer，蘑菇街拿到终面机会但是我没去面:5月4号入职网易，同时蘑菇街通知5月5号现场终面(第五面…)。那天上午办完入职手续后顺哥来接，正在电梯间接到蘑菇街HR电话确认是否能够去终面，根本不确定是否可以请假&amp;感觉刚入职又去面试不大好就拒了。过了几个礼拜蘑菇街HR又给我打电话说北京有面试问我去不去，虽然感动但还是拒了。<br><a id="more"></a></p>
